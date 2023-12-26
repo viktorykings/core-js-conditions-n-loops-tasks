@@ -21,8 +21,9 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number >= 0) return true;
+  return false;
 }
 
 /**
@@ -38,8 +39,11 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let max = a;
+  if (b > max) max = b;
+  if (c > max) max = c;
+  return max;
 }
 
 /**
@@ -82,8 +86,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a === 0 || b === 0 || c === 0) return false;
+  return (
+    (a === b || a === c || b === c) && a + b >= c && a + c >= b && b + c >= a
+  );
 }
 
 /**
@@ -101,6 +108,11 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  26  => XXVI
  */
 function convertToRomanNumerals(/* num */) {
+  // const dic = {
+  //   1: 'I',
+  //   5: 'V',
+  //   10: 'X'
+  // }
   throw new Error('Not implemented');
 }
 
@@ -135,8 +147,12 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let reversed = '';
+  for (let i = str.length - 1; i >= 0; i -= 1) {
+    reversed += str[i];
+  }
+  return str === reversed;
 }
 
 /**
@@ -153,8 +169,18 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  const indexes = {};
+  let counter = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      indexes[counter] = [i];
+      counter += 1;
+    } else {
+      indexes[counter] = [-1];
+    }
+  }
+  return indexes[0];
 }
 
 /**
@@ -172,8 +198,14 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  let res = false;
+  let n = num;
+  while (n > 0) {
+    if (n % 10 === digit) res = true;
+    n = parseInt(n / 10, 10);
+  }
+  return res;
 }
 
 /**
