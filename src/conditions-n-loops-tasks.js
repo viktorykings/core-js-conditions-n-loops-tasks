@@ -64,8 +64,13 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  const { x: qRow, y: qCol } = queen;
+  const { x: kRow, y: kCol } = king;
+  if (qRow === kRow) return true;
+  if (qCol === kCol) return true;
+  if (Math.abs(qRow - kRow) === Math.abs(qCol - kCol)) return true;
+  return false;
 }
 
 /**
@@ -107,13 +112,30 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  // const dic = {
-  //   1: 'I',
-  //   5: 'V',
-  //   10: 'X'
-  // }
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const n = num;
+  if (n < 1) {
+    return '';
+  }
+  if (n >= 40) {
+    return `XL${convertToRomanNumerals(n - 40)}`;
+  }
+  if (n >= 10) {
+    return `X${convertToRomanNumerals(n - 10)}`;
+  }
+  if (n >= 9) {
+    return `IX${convertToRomanNumerals(n - 9)}`;
+  }
+  if (n >= 5) {
+    return `V${convertToRomanNumerals(n - 5)}`;
+  }
+  if (n >= 4) {
+    return `IV${convertToRomanNumerals(n - 4)}`;
+  }
+  if (n >= 1) {
+    return `I${convertToRomanNumerals(n - 1)}`;
+  }
+  return n;
 }
 
 /**
@@ -131,8 +153,44 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const nums = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+  const symbols = ['minus', 'point'];
+
+  let res = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '-':
+        res += symbols[0];
+        res += ' ';
+        break;
+      case '.':
+      case ',':
+        res += symbols[1];
+        res += ' ';
+        break;
+      case '':
+      default:
+        res += `${nums[Number(numberStr[i])]} `;
+        res += '';
+    }
+  }
+  let res1 = '';
+  for (let i = 0; i < res.length - 1; i += 1) {
+    res1 += res[i];
+  }
+  return res1;
 }
 
 /**
